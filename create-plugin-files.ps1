@@ -10,6 +10,9 @@ if (-not (Test-Path $ProjectDir)) {
     New-Item -ItemType Directory -Path $ProjectDir -Force | Out-Null
 }
 
+Write-host "NEED TO UPDATE ALL FILES"
+Pause
+
 # Single-quoted here-string template (no variable expansion) with placeholders {NAMESPACE}, {GUID}, {DISPLAY}
 $pluginTemplate = @'
 using System;

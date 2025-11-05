@@ -1,9 +1,28 @@
+# Build
 bin/
 obj/
+dist/
+
+# VS Code
+.vscode/
+*.code-workspace
 .vs/
+
+# User files
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+.nuget/
+
+#Others
 .idea/
 artifacts
 Release
 *.zip
 node_modules
-dist/
