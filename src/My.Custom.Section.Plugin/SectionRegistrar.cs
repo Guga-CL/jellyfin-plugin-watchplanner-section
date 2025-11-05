@@ -17,7 +17,10 @@ namespace My.Custom.Section.Plugin
                 resultsMethod = resultsMethod
             };
 
-            return JsonSerializer.Deserialize<object>(JsonSerializer.Serialize(payload));
+            // test the code below it, to avoid "Possible null reference return.CS8603"
+            // return JsonSerializer.Deserialize<object>(JsonSerializer.Serialize(payload));
+            var json = JsonSerializer.Serialize(payload);
+            return JsonSerializer.Deserialize<JsonElement>(json);
         }
     }
 }
