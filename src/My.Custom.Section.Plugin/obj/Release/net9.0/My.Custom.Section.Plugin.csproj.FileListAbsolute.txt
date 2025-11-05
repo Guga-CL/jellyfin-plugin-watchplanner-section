@@ -2,3 +2,4 @@ D:\Bibliotecas\OneDrive\Scripts\Jellyfin\plugins\MyCustomJellyfinSection\src\My.
 D:\Bibliotecas\OneDrive\Scripts\Jellyfin\plugins\MyCustomJellyfinSection\src\My.Custom.Section.Plugin\obj\Release\net9.0\My.Custom.Section.Plugin.AssemblyInfoInputs.cache
 D:\Bibliotecas\OneDrive\Scripts\Jellyfin\plugins\MyCustomJellyfinSection\src\My.Custom.Section.Plugin\obj\Release\net9.0\My.Custom.Section.Plugin.AssemblyInfo.cs
 D:\Bibliotecas\OneDrive\Scripts\Jellyfin\plugins\MyCustomJellyfinSection\src\My.Custom.Section.Plugin\obj\Release\net9.0\My.Custom.Section.Plugin.csproj.CoreCompileInputs.cache
+D:\Bibliotecas\OneDrive\Scripts\Jellyfin\plugins\MyCustomJellyfinSection\src\My.Custom.Section.Plugin\obj\Release\net9.0\My.Custom.Section.Plugin.sourcelink.json

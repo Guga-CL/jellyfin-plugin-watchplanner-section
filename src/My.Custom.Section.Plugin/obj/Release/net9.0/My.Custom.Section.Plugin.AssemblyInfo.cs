@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("My.Custom.Section.Plugin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de54a97e21e71e00217a617dc971818538b9e2ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52ef73d8de902dc610ca2722792c3c95bea74e19")]
 [assembly: System.Reflection.AssemblyProductAttribute("My.Custom.Section.Plugin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("My.Custom.Section.Plugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

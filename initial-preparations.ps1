@@ -38,7 +38,7 @@ git commit -m "Initial plugin skeleton: net$dotnet_version classlib"
 
 dotnet add src/$plugin_class_name package MediaBrowser.Common
 dotnet add src/$plugin_class_name package MediaBrowser.Controller
-dotnet add src/$plugin_class_name package MediaBrowser.Model
+dotnet add src/$plugin_class_name package MediaBrowser.Model.Signed
 
 
 Pause
