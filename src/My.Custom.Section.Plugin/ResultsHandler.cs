@@ -1,20 +1,18 @@
 using System.Collections.Generic;
-using MediaBrowser.Model.Querying;
-using MediaBrowser.Model.Entities;
 
 namespace My.Custom.Section.Plugin
 {
     public class ResultsHandler
     {
-        // Entry point called by HomeScreenSections. Must return QueryResult<BaseItemDto>.
-        public static QueryResult<BaseItemDto> GetSectionResults(object request)
+        // Temporary: return an object shaped like QueryResult<BaseItemDto>
+        // so the plugin compiles while we confirm the correct Jellyfin DTO namespaces.
+        public static object GetSectionResults(object request)
         {
-            var result = new QueryResult<BaseItemDto>
+            return new
             {
-                Items = new List<BaseItemDto>(),
+                Items = new object[0],
                 TotalRecordCount = 0
             };
-            return result;
         }
     }
 }
