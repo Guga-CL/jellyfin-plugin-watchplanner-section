@@ -18,14 +18,17 @@ Only continue if you really want to create a new basic repo folder for your plug
 "
 Pause
 mkdir $plugin_name
+
 Set-Location $plugin_name
 git init
 
 # create solution and project
 dotnet new sln -n $plugin_name
 mkdir src
+
 Set-Location src
 dotnet new classlib -n $plugin_class_name -f net$dotnet_version
+
 Set-Location ..
 dotnet sln add src/$plugin_class_name/$plugin_class_name.csproj
 
@@ -35,7 +38,7 @@ code .
 git add .
 git commit -m "Initial plugin skeleton: net$dotnet_version classlib"
 
-
+# * add the basic necessary packages to our .csproj  
 dotnet add src/$plugin_class_name package Jellyfin.Common
 dotnet add src/$plugin_class_name package Jellyfin.Controller
 dotnet add src/$plugin_class_name package Jellyfin.Model
