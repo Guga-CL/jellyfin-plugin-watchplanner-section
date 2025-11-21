@@ -1,47 +1,126 @@
-// PresetController.cs
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MediaBrowser.Common.Configuration;
-using MediaBrowser.Common.Plugins;
-using MediaBrowser.Controller; // can be useful if your Jellyfin package exposes types here using Jellyfin.Server; // include if your Jellyfin references expose types under this 
-using MediaBrowser.Model.Plugins;
-using MediaBrowser.Model.Serialization;
-using Newtonsoft.Json.Linq;
 
 namespace WatchPlanner.Server.Controllers
 {
-    [Route("/plugins/watchplanner/presets")]
     [ApiController]
+    [Route("plugins/watchplanner/presets")]
     public class PresetController : ControllerBase
     {
         private readonly IApplicationPaths _appPaths;
         private readonly ILogger<PresetController> _logger;
         private readonly string _presetPath;
 
-    public PresetController(IApplicationPaths appPaths, ILogger<PresetController> logger)
-    {
-        _appPaths = appPaths;
-        _logger = logger;
-
-        var pluginFolder = Path.Combine(_appPaths.PluginDataPath ?? _appPaths.ApplicationDataPath, "watchplanner");
-        try
+        public PresetController(IApplicationPaths appPaths, ILogger<PresetController> logger)
         {
-            if (!Directory.Exists(pluginFolder))
-                Directory.CreateDirectory(pluginFolder);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "Could not create plugin folder: {path}", pluginFolder);
-        }
-        _presetPath = Path.Combine(pluginFolder, "preset.json");
-    }
+            _appPaths = appPaths ?? throw new ArgumentNullException(nameof(appPaths));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
+            var pluginFolder = ResolvePluginFolder(_appPaths);
+            _presetPath = Path.Combine(pluginFolder, "preset.json");
+        }
+
+        // Reflection-based resolver to avoid depending on a specific IApplicationPaths shape
+        private string ResolvePluginFolder(IApplicationPaths appPaths)
+        {
+            try
+            {
+                var t = appPaths.GetType();
+                string? pluginData = null;
+
+                // Common property names to try
+                string[] tryProps = new[]
+                {
+                    "PluginDataPath",
+                    "PluginDataDirectory",
+                    "PluginData",
+                    "PluginPath",
+                    "ApplicationDataPath",
+                    "ApplicationDataDirectory",
+                    "ApplicationPaths",
+                    "DataPath"
+                };
+
+                foreach (var name in tryProps)
+                {
+                    var p = t.GetProperty(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    if (p != null)
+                    {
+                        var val = p.GetValue(appPaths) as string;
+                        if (!string.IsNullOrWhiteSpace(val))
+                        {
+                            pluginData = val;
+                            break;
+                        }
+                    }
+                }
+
+                // Try common method names if properties didn't work
+                if (pluginData == null)
+                {
+                    string[] tryMethods = new[] { "GetPluginDataPath", "GetDataPath", "GetApplicationDataPath", "GetApplicationPaths" };
+                    foreach (var mName in tryMethods)
+                    {
+                        var mi = t.GetMethod(mName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                        if (mi != null)
+                        {
+                            var val = mi.Invoke(appPaths, Array.Empty<object>()) as string;
+                            if (!string.IsNullOrWhiteSpace(val))
+                            {
+                                pluginData = val;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Final fallback locations
+                if (string.IsNullOrWhiteSpace(pluginData))
+                {
+                    var programData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                    var baseDir = AppContext.BaseDirectory;
+                    // prefer programData\Jellyfin if available, otherwise base directory
+                    pluginData = !string.IsNullOrWhiteSpace(programData)
+                        ? Path.Combine(programData, "Jellyfin", "data")
+                        : Path.Combine(baseDir ?? ".", "data");
+                }
+
+                var folder = Path.Combine(pluginData, "watchplanner");
+
+                try
+                {
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Could not create plugin folder: {path}", folder);
+                }
+
+                _logger.LogInformation("[Watchplanner] Using plugin folder: {path}", folder);
+                return folder;
+            }
+            catch (Exception ex)
+            {
+                // If reflection fails for some reason, fall back to a safe path and log
+                var fallback = Path.Combine(AppContext.BaseDirectory ?? ".", "watchplanner-data");
+                _logger.LogWarning(ex, "[Watchplanner] Failed to resolve plugin folder via IApplicationPaths reflection; falling back to {path}", fallback);
+                try
+                {
+                    if (!Directory.Exists(fallback))
+                        Directory.CreateDirectory(fallback);
+                }
+                catch { /* swallow - best effort */ }
+                return fallback;
+            }
+        }
 
         [HttpGet]
         [Authorize]

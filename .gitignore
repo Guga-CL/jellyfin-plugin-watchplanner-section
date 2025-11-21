@@ -30,6 +30,6 @@ artifacts
 Release
 *.zip
 node_modules
-MyCustomJellyfinSection.sln
 My.Custom.Section.Plugin.bak/
 scripts/build-it/version.txt
+jellyfin-plugin-watchplanner-section.sln
