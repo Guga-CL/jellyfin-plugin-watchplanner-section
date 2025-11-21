@@ -1,8 +1,0 @@
-{
-  "name": "Watchplanner Section",
-  "guid": "7f766bcf-d759-4037-96bf-47a4115b12b5",
-  "version": "0.0.0.1",
-  "description": "Plan the series you watch during the week.",
-  "assembly": "WatchPlanner.Server.dll"
-}
-

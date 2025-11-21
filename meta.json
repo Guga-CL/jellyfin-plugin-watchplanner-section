@@ -1,0 +1,13 @@
+{
+  "name": "Watch Planner Section",
+  "guid": "7b5f2a58-4c2b-4f2f-9f5a-0a6a9f1a9b20",
+  "version": "0.0.0.1",
+  "targetAbi": "10.11.0.0",
+  "description": "Global watch planner UI injected on home; admin-editable, persisted on disk.",
+  "owner": "Guga-CL",
+  "category": "General",
+  "artifacts": [],
+  "imageUrl": "",
+  "changelog": "Initial Jellyfin 10.11-compatible DLL with config endpoints and automatic injector registration.",
+  "pluginId": "watchplanner-section"
+}
