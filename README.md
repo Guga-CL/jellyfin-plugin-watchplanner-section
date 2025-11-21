@@ -5,6 +5,7 @@ All users can view the planner; only admins can edit. Planner data is stored on 
 Front‑end is auto‑injected when JavaScript Injector (or compatible) is present; otherwise you can add a small loader later.
 
 Obs.: This is just a test script to understand how to configure a plugin and use jellyfin API, expect to see some odd stuff that may not be useful for anyone. 
+
 ---
 
 ## What this plugin does
