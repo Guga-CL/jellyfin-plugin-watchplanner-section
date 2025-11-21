@@ -1,0 +1,15 @@
+{
+  "name": "watchplanner-section",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@jellyfin/sdk": "^0.11.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js --mode production",
+    "build:single": "webpack --config webpack.config.js --mode production --env SINGLE true",
+    "analyze": "cross-env ANALYZE=true webpack --config webpack.config.js --mode production",
+    "dev": "webpack --config webpack.config.js --mode development --watch"
+  }
+
+}
