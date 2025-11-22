@@ -1,7 +1,14 @@
-namespace Jellyfin.Plugin.WatchPlannerSection
+using MediaBrowser.Model.Plugins;
+
+namespace Jellyfin.Plugin.WatchPlannerSection.Configuration
 {
-    // Empty placeholder; you can add properties if you want plugin settings later.
-    public class PluginConfiguration
+    public class PluginConfiguration : BasePluginConfiguration
     {
+        public string ExampleSetting { get; set; } = "default";
+
+        public PluginConfiguration()
+        {
+            // Only set defaults here, no filesystem or Jellyfin calls
+        }
     }
 }
