@@ -18,6 +18,7 @@ namespace Jellyfin.Plugin.WatchPlannerSection
         {
             _logger = logger;
 
+            // Safe startup logic
             try
             {
                 TryRegisterInjector();
@@ -51,7 +52,7 @@ namespace Jellyfin.Plugin.WatchPlannerSection
                 if (registerMethod == null)
                 {
                     _logger.LogWarning("WatchPlanner: Injector found, but no Register* method available. Skipping.");
-                    return; // <-- guard prevents NullReferenceException
+                    return;
                 }
 
                 var scriptTag = "<script src=\"/web/plugins/Watch Planner Section_0.0.0.1/watchplanner/plugin-client.js\"></script>";
