@@ -6,9 +6,6 @@ namespace Jellyfin.Plugin.WatchPlannerSection.Configuration
     {
         public string ExampleSetting { get; set; } = "default";
 
-        public PluginConfiguration()
-        {
-            // Only set defaults here, no filesystem or Jellyfin calls
-        }
+        public PluginConfiguration() { }
     }
 }

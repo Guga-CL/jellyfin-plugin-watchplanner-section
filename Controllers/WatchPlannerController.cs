@@ -8,5 +8,7 @@ namespace Jellyfin.Plugin.WatchPlannerSection.Controllers
     {
         [HttpGet("ping")]
         public IActionResult Ping() => Ok(new { ok = true });
+
+        // Add your real endpoints here, but keep constructors empty and avoid static initializers.
     }
 }

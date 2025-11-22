@@ -1,8 +1,5 @@
 using System;
 using MediaBrowser.Common.Plugins;
-using MediaBrowser.Model.Serialization;
-using MediaBrowser.Common.Configuration;
-
 
 namespace Jellyfin.Plugin.WatchPlannerSection
 {
@@ -12,10 +9,7 @@ namespace Jellyfin.Plugin.WatchPlannerSection
         public override string Description => "Global watch planner UI injected on home; admin-editable, persisted in plugin config directory.";
         public override Guid Id => Guid.Parse("7b5f2a58-4c2b-4f2f-9f5a-0a6a9f1a9b20");
 
-        public Plugin()
-        {
-            // Empty constructor — no DI, no logging, no startup logic
-        }
+        // Jellyfin 10.11+ expects a parameterless constructor
+        public Plugin() { }
     }
-
 }

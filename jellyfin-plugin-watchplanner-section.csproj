@@ -21,14 +21,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-
-<ItemGroup>
-  <!-- Remove unwanted files -->
-  <Compile Remove="Controllers\**\*.cs" />
-  <Compile Remove="PluginConfiguration.cs" />
-</ItemGroup>
-
-
-
 </Project>
