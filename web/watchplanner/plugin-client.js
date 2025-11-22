@@ -1,4 +1,5 @@
 (function () {
+  console.log("watchplanner-injected")
   // Detect if we are on Jellyfin home page
   function isHome() {
     return location.hash.startsWith('#/home') || location.hash === '' || location.hash === '#';
