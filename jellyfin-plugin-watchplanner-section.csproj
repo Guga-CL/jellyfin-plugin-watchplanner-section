@@ -5,13 +5,15 @@
     <AssemblyName>Jellyfin.Plugin.WatchPlannerSection</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!-- Ensure build produces a plain library with full metadata -->
+    <DebugType>portable</DebugType>
+    <Deterministic>true</Deterministic>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <!-- Reference Jellyfin’s abstractions matching server 10.11.3 -->
     <PackageReference Include="Jellyfin.Common" Version="10.11.3" />
     <PackageReference Include="Jellyfin.Model" Version="10.11.3" />
   </ItemGroup>
