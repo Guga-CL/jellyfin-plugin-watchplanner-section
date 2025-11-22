@@ -17,7 +17,15 @@ namespace Jellyfin.Plugin.WatchPlannerSection
         public Plugin(ILogger<Plugin> logger)
         {
             _logger = logger;
-            TryRegisterInjector();
+
+            try
+            {
+                TryRegisterInjector();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning("WatchPlanner: Startup injection skipped due to error: {Message}", ex.Message);
+            }
         }
 
         private void TryRegisterInjector()
@@ -42,8 +50,8 @@ namespace Jellyfin.Plugin.WatchPlannerSection
 
                 if (registerMethod == null)
                 {
-                    _logger.LogWarning("WatchPlanner: Injector found, but no Register* method available.");
-                    return;
+                    _logger.LogWarning("WatchPlanner: Injector found, but no Register* method available. Skipping.");
+                    return; // <-- guard prevents NullReferenceException
                 }
 
                 var scriptTag = "<script src=\"/web/plugins/Watch Planner Section_0.0.0.1/watchplanner/plugin-client.js\"></script>";
